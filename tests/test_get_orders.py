@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import allure
 from data.ingredients import get_random_ingredients
+from data.user import UserErrorMsgs
 from methods.order_methods import OrderMethods
 from models.user import CreatedUser
 
@@ -33,4 +34,4 @@ class TestGetOrders:
         assert (status_code == 401 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'You should be authorised')
+                response_data['message'] == UserErrorMsgs.get_data_without_authorization_error_msg)

@@ -7,6 +7,7 @@ import allure
 import pytest
 from methods.user_methods import UserMethods
 from models.user import CreatedUser
+from data.user import UserErrorMsgs
 
 
 # Тесты на создание пользователя
@@ -30,7 +31,7 @@ class TestCreateUser:
         assert (status_code == 403 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'User already exists')
+                response_data['message'] == UserErrorMsgs.user_already_exists_error_msg)
 
 
     @allure.title('Ошибка при создании пользователя без required полей')
@@ -44,4 +45,4 @@ class TestCreateUser:
         assert (status_code == 403 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'Email, password and name are required fields')
+                response_data['message'] == UserErrorMsgs.required_fields_error_msg)

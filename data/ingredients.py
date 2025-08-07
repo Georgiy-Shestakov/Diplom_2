@@ -20,3 +20,8 @@ dict_of_ingredients = {
 
 def get_random_ingredients(ingredients_count: int = 3) -> list[str]:
     return random.choices(list(dict_of_ingredients.keys()), k=ingredients_count)
+
+class IngredientsErrorMsgs:
+    order_without_ingredients_error_msg = 'Ingredient ids must be provided'
+    unexpected_ingredient_error_msg = 'One or more ids provided are incorrect'
+

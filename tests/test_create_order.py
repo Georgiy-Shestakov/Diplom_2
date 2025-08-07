@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import allure
-from data.ingredients import get_random_ingredients
+from data.ingredients import get_random_ingredients, IngredientsErrorMsgs
 from methods.order_methods import OrderMethods
 from models.user import CreatedUser
 
@@ -42,7 +42,7 @@ class TestCreateOrder:
         assert (status_code == 400 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'Ingredient ids must be provided')
+                response_data['message'] == IngredientsErrorMsgs.order_without_ingredients_error_msg)
 
 
     @allure.title('Ошибка при заказе с несуществующим ингридиентом')
@@ -53,7 +53,7 @@ class TestCreateOrder:
         assert (status_code == 400 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'One or more ids provided are incorrect')
+                response_data['message'] == IngredientsErrorMsgs.unexpected_ingredient_error_msg)
 
 
     @allure.title('Ошибка 500 при заказе с указанием невалидного хэша ингредиента')

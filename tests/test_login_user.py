@@ -7,6 +7,7 @@ import allure
 import pytest
 from methods.user_methods import UserMethods
 from models.user import CreatedUser
+from data.user import UserErrorMsgs
 
 
 # Тесты на авторизацию (логин пользователя)
@@ -31,4 +32,4 @@ class TestLoginUser:
         assert (status_code == 401 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'email or password are incorrect')
+                response_data['message'] == UserErrorMsgs.wrong_creds_error_msg)

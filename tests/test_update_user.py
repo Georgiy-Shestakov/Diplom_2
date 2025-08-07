@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import allure
 import pytest
-from data.user import generate_user_data
+from data.user import generate_user_data, UserErrorMsgs
 from methods.user_methods import UserMethods
 from models.user import CreatedUser
 
@@ -38,4 +38,4 @@ class TestUpdateUser:
         assert (status_code == 401 and
                 isinstance(response_data, dict) and
                 response_data['success'] is False and
-                response_data['message'] == 'You should be authorised')
+                response_data['message'] == UserErrorMsgs.get_data_without_authorization_error_msg)
