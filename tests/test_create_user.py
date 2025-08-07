@@ -13,8 +13,9 @@ from models.user import CreatedUser
 class TestCreateUser:
     
     @allure.title('Можно создать пользователя')
-    def test_create_user_positive(self, user_data: dict[str, str]) -> None:
-        status_code, response_data = UserMethods.register(user_data=user_data)
+    def test_create_user_positive(self, create_user_with_status: tuple[int, CreatedUser]) -> None:
+        status_code, created_user = create_user_with_status
+        response_data = created_user.response_data
         
         assert (status_code == 200 and
                 isinstance(response_data, dict) and
